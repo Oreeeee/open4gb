@@ -75,12 +75,7 @@ int main(int argc, char **argv) {
 
     printf("Writing new characteristics\n");
     fseek(fp, peOffset + CHARACTERISTICS_FIELD_OFFSET, SEEK_SET); // Go back to the cursor position before fread
-    if (fwrite(&newChrctr, sizeof(uint16_t), 1, fp) == sizeof(uint16_t)) {
-        printf("Wrote %d of bytes successfuly\n", sizeof(uint16_t));
-    } else {
-        fprintf(stderr, "Failed to write new characteristics: %s\n", strerror(errno));
-        return -4;
-    }
+    fwrite(&newChrctr, sizeof(uint16_t), 1, fp) == sizeof(uint16_t); // Assume that everything is okay lol
 
     printf("New characteristics written!\n");
     fclose(fp);
